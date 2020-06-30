@@ -16,7 +16,9 @@ export default class PeopleList extends React.Component {
         fetch('/api/person')
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            this.setState({
+                data: data
+            })
         })
 
     }
@@ -31,9 +33,26 @@ export default class PeopleList extends React.Component {
         // if the data arrived already
         if (this.state.data !== null){
 
+            console.log(this.state.data);
             // overwrite content with something else
             content = (
-                <div>Data arrived</div>
+                <ul>
+                    {
+                        this.state.data.map(person => (
+
+                            <li className="person" key={ person.id }>
+                                <div className="person__image">
+                                    <img src={ person.image_url } alt=""/>
+                                </div>
+                                <div className="person__data">
+                                    <div className="person__name">{ person.name }</div>
+                                    <div className="person__nationality">{ person.nationality }</div>
+                                </div>
+                            </li>
+
+                        ))
+                    }
+                </ul>
             )
 
         }

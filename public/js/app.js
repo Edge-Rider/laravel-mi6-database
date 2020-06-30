@@ -28718,7 +28718,9 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
       fetch('/api/person').then(function (response) {
         return response.json();
       }).then(function (data) {
-        console.log(data);
+        _this.setState({
+          data: data
+        });
       });
     });
 
@@ -28737,8 +28739,25 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
       }, "Loading data..."); // if the data arrived already
 
       if (this.state.data !== null) {
-        // overwrite content with something else
-        content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Data arrived");
+        console.log(this.state.data); // overwrite content with something else
+
+        content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.data.map(function (person) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            className: "person",
+            key: person.id
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "person__image"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            src: person.image_url,
+            alt: ""
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "person__data"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "person__name"
+          }, person.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+            className: "person__nationality"
+          }, person.nationality)));
+        }));
       } // return the HTML code for this component with the content inside
 
 
