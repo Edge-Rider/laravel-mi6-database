@@ -9,11 +9,14 @@ export default class App extends React.Component {
 
         this.state = {
             logged_in: null,
-            token: window.localStorage.getItem('_token')
+            token: window.localStorage.getItem('_token') // get the initial value of the token from the browser's storage
         }
     }
 
     componentDidMount() {
+        // change the state to reflect existence of a token
+        // UPGRADE: we should check the value against another
+        //          API endpoint to see if it is valid
         this.setState({
             logged_in: this.state.token !== null
         })
@@ -21,8 +24,11 @@ export default class App extends React.Component {
 
     onLoginSuccess = (token) => {
  
+        // store the token in the browser's storage
         window.localStorage.setItem('_token', token)
      
+        // change the current state of this App to reflect
+        // that we are logged-in
         this.setState({
             logged_in: true,
             token: token
@@ -31,8 +37,11 @@ export default class App extends React.Component {
 
     onFailedAuthentication = () => {
 
+        // remove the token from the browser's storage
         window.localStorage.removeItem('_token');
 
+        // change the current state of this App to reflect
+        // that we don't have a good token (we are not logged-in)
         this.setState({
             logged_in: false,
             token: null

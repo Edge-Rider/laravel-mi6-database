@@ -20,18 +20,25 @@ export default class PeopleList extends React.Component {
                 'Authorization': 'Bearer ' + this.props.token
             }
         })
-        .then(response => response.json())
-        .then(data => {
-            if (typeof(data.message) == 'undefined') {
-                this.setState({
-                    data: data
+        .then(response => {
+            // if the response code is 200 (OK)
+            if (response.status == 200) {
+                // parse it as JSON and do the typical stuff
+                response.json()
+                .then(data => {
+                    // set the data into this component's state
+                    this.setState({
+                        data: data
+                    })
                 })
+            } else {
+                // otherwise react on the error code
+                if (response.status == 401) {
+                    // signal to the App that authentication failed
+                    this.props.onFailedAuthentication()
+                }
             }
         })
-        .catch(() => {
-            this.props.onFailedAuthentication()
-        })
-
     }
 
     render() {
@@ -44,7 +51,6 @@ export default class PeopleList extends React.Component {
         // if the data arrived already
         if (this.state.data !== null){
 
-            console.log(this.state.data);
             // overwrite content with something else
             content = (
                 <ul>

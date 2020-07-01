@@ -28656,7 +28656,9 @@ var App = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
 
     _defineProperty(_assertThisInitialized(_this), "onLoginSuccess", function (token) {
-      window.localStorage.setItem('_token', token);
+      // store the token in the browser's storage
+      window.localStorage.setItem('_token', token); // change the current state of this App to reflect
+      // that we are logged-in
 
       _this.setState({
         logged_in: true,
@@ -28665,7 +28667,9 @@ var App = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onFailedAuthentication", function () {
-      window.localStorage.removeItem('_token');
+      // remove the token from the browser's storage
+      window.localStorage.removeItem('_token'); // change the current state of this App to reflect
+      // that we don't have a good token (we are not logged-in)
 
       _this.setState({
         logged_in: false,
@@ -28675,7 +28679,8 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {
       logged_in: null,
-      token: window.localStorage.getItem('_token')
+      token: window.localStorage.getItem('_token') // get the initial value of the token from the browser's storage
+
     };
     return _this;
   }
@@ -28683,6 +28688,9 @@ var App = /*#__PURE__*/function (_React$Component) {
   _createClass(App, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      // change the state to reflect existence of a token
+      // UPGRADE: we should check the value against another
+      //          API endpoint to see if it is valid
       this.setState({
         logged_in: this.state.token !== null
       });
@@ -28893,15 +28901,22 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
           'Authorization': 'Bearer ' + _this.props.token
         }
       }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        if (typeof data.message == 'undefined') {
-          _this.setState({
-            data: data
+        // if the response code is 200 (OK)
+        if (response.status == 200) {
+          // parse it as JSON and do the typical stuff
+          response.json().then(function (data) {
+            // set the data into this component's state
+            _this.setState({
+              data: data
+            });
           });
+        } else {
+          // otherwise react on the error code
+          if (response.status == 401) {
+            // signal to the App that authentication failed
+            _this.props.onFailedAuthentication();
+          }
         }
-      })["catch"](function () {
-        _this.props.onFailedAuthentication();
       });
     });
 
@@ -28920,8 +28935,7 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
       }, "Loading data..."); // if the data arrived already
 
       if (this.state.data !== null) {
-        console.log(this.state.data); // overwrite content with something else
-
+        // overwrite content with something else
         content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.data.map(function (person) {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             className: "person",
