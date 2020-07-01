@@ -9,6 +9,10 @@
     <title>MI6 system</title>
 </head>
 <body>
+
+    <nav>
+        TOPMENU
+    </nav>
  
     @yield('content')
  

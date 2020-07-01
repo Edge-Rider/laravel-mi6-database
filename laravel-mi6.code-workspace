@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"name": "laravel-mi6",
+			"path": "."
+		},
+		{
+			"name": "Controllers",
+			"path": "app\\Http\\Controllers"
+		},
+		{
+			"name": "routes",
+			"path": "routes"
+		},
+		{
+			"name": "views",
+			"path": "resources\\views"
+		},
+		{
+			"path": "resources\\js\\App"
+		}
+	],
+	"settings": {}
+}
