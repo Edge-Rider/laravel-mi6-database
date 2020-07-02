@@ -29008,8 +29008,8 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\web\codingbootcamp\projects\laravel-mi6\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\web\codingbootcamp\projects\laravel-mi6\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/slavo/Code/valet/laravel-mi6-database/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/slavo/Code/valet/laravel-mi6-database/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
