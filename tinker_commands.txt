@@ -1,0 +1,51 @@
+>>> $p = Person::first();
+[!] Aliasing 'Person' to 'App\Person' for this Tinker session.
+=> App\Person {#3795
+     id: 1,
+     image_id: 1,
+     status_id: null,
+     name: "Unknown",
+     title: null,
+     age: null,
+     born: null,
+     died: null,
+     features: null,
+     hair_color: "Blond, short",
+     eye_color: "Blue",
+     height: null,
+     weight: null,
+     nationality: "British",
+     occupation: "Intelligence operative, 00 Agent",
+     status_text: "Active",
+     created_at: "2020-07-01 19:19:51",
+     updated_at: "2020-07-01 19:19:51",
+   }
+>>> $m = Mission::first()
+[!] Aliasing 'Mission' to 'App\Mission' for this Tinker session.
+=> App\Mission {#3796
+     id: 1,
+     name: "Dr. No",
+     year: 1962,
+     created_at: "2020-07-02 11:33:47",
+     updated_at: "2020-07-02 11:33:47",
+   }
+>>> $p->missions()->attach($m)
+=> null
+>>> $p->missions
+=> Illuminate\Database\Eloquent\Collection {#3069
+     all: [
+       App\Mission {#3073
+         id: 1,
+         name: "Dr. No",
+         year: 1962,
+         created_at: "2020-07-02 11:33:47",
+         updated_at: "2020-07-02 11:33:47",
+         pivot: Illuminate\Database\Eloquent\Relations\Pivot {#3067
+           person_id: 1,
+           mission_id: 1,
+         },
+       },
+     ],
+   }
+>>> q
+
