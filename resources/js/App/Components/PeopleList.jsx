@@ -1,4 +1,5 @@
 import React from 'react';
+import PersonMissions from "./PersonMissions";
 
 export default class PeopleList extends React.Component {
 
@@ -65,6 +66,7 @@ export default class PeopleList extends React.Component {
                                     <div className="person__name">{ person.name }</div>
                                     <div className="person__nationality">{ person.nationality }</div>
                                 </div>
+                                <PersonMissions/>
                             </li>
 
                         ))
