@@ -28891,7 +28891,7 @@ var Mission = /*#__PURE__*/function (_React$Component) {
   _createClass(Mission, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.props.name), this.props.year);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.props.name), this.props.year, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Remove"));
     }
   }]);
 
@@ -29014,7 +29014,9 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
             className: "person__name"
           }, person.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "person__nationality"
-          }, person.nationality)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PersonMissions__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+          }, person.nationality)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PersonMissions__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            missions: person.missions
+          }));
         }));
       } // return the HTML code for this component with the content inside
 
@@ -29079,21 +29081,21 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, PersonMissions);
 
     return _super.call(this, props);
-  }
+  } // todo - fetch data from DB and render missions as options of select
+  // todo - make Add button working
+
 
   _createClass(PersonMissions, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Mission__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        name: "test mission 1",
-        year: 2000
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Mission__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        name: "test mission 2",
-        year: 2001
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Mission__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        name: "test mission 3",
-        year: 2002
-      }));
+      console.log(this.props.missions);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.missions.map(function (mission, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Mission__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: i,
+          name: mission.name,
+          year: mission.year
+        });
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mission 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mission 2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add")));
     }
   }]);
 

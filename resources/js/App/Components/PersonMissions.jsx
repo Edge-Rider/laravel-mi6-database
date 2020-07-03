@@ -9,14 +9,30 @@ export default class PersonMissions extends React.Component {
 
     }
 
+    // todo - fetch data from DB and render missions as options of select
+    // todo - make Add button working
 
     render() {
+
+        console.log(this.props.missions);
+
         return (
-            <ul>
-                <Mission name="test mission 1" year={2000}/>
-                <Mission name="test mission 2" year={2001}/>
-                <Mission name="test mission 3" year={2002}/>
-            </ul>
+            <div>
+                <ul>
+                    {
+                        this.props.missions.map((mission, i) => (
+                            <Mission key={i} name={mission.name} year={mission.year}/>
+                        ))
+                    }
+                </ul>
+                <form>
+                    <select>
+                        <option>Mission 1</option>
+                        <option>Mission 2</option>
+                    </select>
+                    <button>Add</button>
+                </form>
+            </div>
         )
     }
 }

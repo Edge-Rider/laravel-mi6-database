@@ -14,6 +14,7 @@ export default class Mission extends React.Component {
             <li>
                 <strong>{this.props.name}</strong>
                 {this.props.year}
+                <button>Remove</button>
             </li>
         )
     }
