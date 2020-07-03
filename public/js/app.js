@@ -29019,6 +29019,8 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
   _createClass(PeopleList, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       console.log(this.state); // define initial content (the Loading... indicator)
 
       var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -29043,7 +29045,8 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
           }, person.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "person__nationality"
           }, person.nationality)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PersonMissions__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            missions: person.missions
+            missions: person.missions,
+            allMissions: _this2.state.allMissions
           }));
         }));
       } // return the HTML code for this component with the content inside
@@ -29106,9 +29109,15 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(PersonMissions);
 
   function PersonMissions(props) {
+    var _this;
+
     _classCallCheck(this, PersonMissions);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      newMission: null
+    };
+    return _this;
   } // todo - fetch data from DB and render missions as options of select
   // todo - make Add button working
 
@@ -29116,14 +29125,28 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
   _createClass(PersonMissions, [{
     key: "render",
     value: function render() {
-      console.log(this.props.missions);
+      var _this2 = this;
+
+      console.log(this.state);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.missions.map(function (mission, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Mission__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: i,
           name: mission.name,
           year: mission.year
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mission 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null, "Mission 2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add")));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        value: this.state.newMission,
+        onChange: function onChange(e) {
+          _this2.setState({
+            newMission: e.target.value
+          });
+        }
+      }, this.props.allMissions.map(function (mission, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: i,
+          value: mission.id
+        }, mission.name);
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Add")));
     }
   }]);
 

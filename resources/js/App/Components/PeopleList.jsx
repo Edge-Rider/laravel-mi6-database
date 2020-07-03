@@ -42,7 +42,6 @@ export default class PeopleList extends React.Component {
             }
         })
 
-
         fetch('/api/mission', {
             headers: {
                 'Accept':       'application/json', // we expect JSON as response
@@ -74,7 +73,7 @@ export default class PeopleList extends React.Component {
     render() {
 
         console.log(this.state);
-        
+
         // define initial content (the Loading... indicator)
         let content = (
             <div className="loading">Loading data...</div>
@@ -97,7 +96,7 @@ export default class PeopleList extends React.Component {
                                     <div className="person__name">{ person.name }</div>
                                     <div className="person__nationality">{ person.nationality }</div>
                                 </div>
-                                <PersonMissions missions={person.missions}/>
+                                <PersonMissions missions={person.missions} allMissions={this.state.allMissions}/>
                             </li>
                         ))
                     }

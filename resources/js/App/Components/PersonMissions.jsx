@@ -6,16 +6,16 @@ export default class PersonMissions extends React.Component {
     constructor(props) {
         super(props);
 
-
+        this.state = {
+            newMission: null
+        }
     }
 
     // todo - fetch data from DB and render missions as options of select
     // todo - make Add button working
 
     render() {
-
-        console.log(this.props.missions);
-
+        console.log(this.state);
         return (
             <div>
                 <ul>
@@ -26,9 +26,15 @@ export default class PersonMissions extends React.Component {
                     }
                 </ul>
                 <form>
-                    <select>
-                        <option>Mission 1</option>
-                        <option>Mission 2</option>
+                    <select
+                        value={this.state.newMission}
+                        onChange={(e) => { this.setState({ newMission: e.target.value }) }}
+                    >
+                        {
+                            this.props.allMissions.map((mission, i) => (
+                                <option key={i} value={mission.id}>{mission.name}</option>
+                            ))
+                        }
                     </select>
                     <button>Add</button>
                 </form>
