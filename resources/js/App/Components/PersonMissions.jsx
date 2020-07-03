@@ -23,6 +23,7 @@ export default class PersonMissions extends React.Component {
             headers: {
                 'Accept':       'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.props.token,
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             }
         })
@@ -35,7 +36,7 @@ export default class PersonMissions extends React.Component {
 
 
                 }
-            })
+            });
 
         console.log('attach new mission', this.state.newMission, this.props.person.id);
     }

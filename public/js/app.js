@@ -29045,6 +29045,7 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
           }, person.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "person__nationality"
           }, person.nationality)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PersonMissions__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            token: _this2.props.token,
             person: person,
             missions: person.missions,
             allMissions: _this2.state.allMissions
@@ -29129,6 +29130,7 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + _this.props.token,
           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         }
       }).then(function (response) {
