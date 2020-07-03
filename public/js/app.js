@@ -29120,7 +29120,7 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleNewMissionSubmit", function (event) {
       event.preventDefault();
-      fetch('/api/whatever', {
+      fetch('/api/mission/attach', {
         method: 'POST',
         body: JSON.stringify({
           person_id: _this.props.person.id,

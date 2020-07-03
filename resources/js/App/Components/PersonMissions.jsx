@@ -14,7 +14,7 @@ export default class PersonMissions extends React.Component {
     handleNewMissionSubmit = (event) => {
         event.preventDefault();
 
-        fetch('/api/whatever', {
+        fetch('/api/mission/attach', {
             method: 'POST',
             body: JSON.stringify({
                 person_id: this.props.person.id,
