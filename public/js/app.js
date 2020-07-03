@@ -28981,10 +28981,37 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
           }
         }
       });
+      fetch('/api/mission', {
+        headers: {
+          'Accept': 'application/json',
+          // we expect JSON as response
+          'Content-Type': 'application/json',
+          // if we are sending something in the body, it is JSON
+          'Authorization': 'Bearer ' + _this.props.token
+        }
+      }).then(function (response) {
+        // if the response code is 200 (OK)
+        if (response.status == 200) {
+          // parse it as JSON and do the typical stuff
+          response.json().then(function (data) {
+            // set the data into this component's state
+            _this.setState({
+              allMissions: data
+            });
+          });
+        } else {
+          // otherwise react on the error code
+          if (response.status == 401) {
+            // signal to the App that authentication failed
+            _this.props.onFailedAuthentication();
+          }
+        }
+      });
     });
 
     _this.state = {
-      data: null
+      data: null,
+      allMissions: null
     };
     return _this;
   }
@@ -28992,7 +29019,8 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
   _createClass(PeopleList, [{
     key: "render",
     value: function render() {
-      // define initial content (the Loading... indicator)
+      console.log(this.state); // define initial content (the Loading... indicator)
+
       var content = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "loading"
       }, "Loading data..."); // if the data arrived already

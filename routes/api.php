@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth:api']], function ($group) {
  
     // define your protected routes in here
     Route::get('/person', 'Api\PersonController@index');
+    Route::get('/mission', 'Api\MissionController@index');
+    
  
 });
 
