@@ -7,6 +7,7 @@ export default class PersonMissions extends React.Component {
         super(props);
 
         this.state = {
+            missions: props.missions,
             newMission: null
         }
     }
@@ -29,13 +30,9 @@ export default class PersonMissions extends React.Component {
         })
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
 
+                this.setState({missions: data});
 
-                    console.log('success!');
-
-
-                }
             });
 
         console.log('attach new mission', this.state.newMission, this.props.person.id);
@@ -48,7 +45,7 @@ export default class PersonMissions extends React.Component {
             <div>
                 <ul>
                     {
-                        this.props.missions.map((mission, i) => (
+                        this.state.missions.map((mission, i) => (
                             <Mission key={i} name={mission.name} year={mission.year}/>
                         ))
                     }

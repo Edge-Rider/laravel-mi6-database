@@ -29136,14 +29136,15 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
       }).then(function (response) {
         return response.json();
       }).then(function (data) {
-        if (data.status === 'success') {
-          console.log('success!');
-        }
+        _this.setState({
+          missions: data
+        });
       });
       console.log('attach new mission', _this.state.newMission, _this.props.person.id);
     });
 
     _this.state = {
+      missions: props.missions,
       newMission: null
     };
     return _this;
@@ -29155,7 +29156,7 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       console.log(this.state);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.props.missions.map(function (mission, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.missions.map(function (mission, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Mission__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: i,
           name: mission.name,

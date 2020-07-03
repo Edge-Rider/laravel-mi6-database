@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Mission;
+use App\Person;
 use Illuminate\Http\Request;
 
 class MissionController extends Controller
@@ -17,6 +18,8 @@ class MissionController extends Controller
         $mission_id = $request->input('mission_id');
 
         Mission::findOrFail($mission_id)->people()->attach($person_id);
+
+        return Person::findOrFail($person_id)->missions;
     }
 
     public function detachPerson(Request $request){
