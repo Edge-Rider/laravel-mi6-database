@@ -11,8 +11,35 @@ export default class PersonMissions extends React.Component {
         }
     }
 
-    // todo - fetch data from DB and render missions as options of select
-    // todo - make Add button working
+    handleNewMissionSubmit = (event) => {
+        event.preventDefault();
+
+        fetch('/api/whatever', {
+            method: 'POST',
+            body: JSON.stringify({
+                person_id: this.props.person.id,
+                mission_id: this.state.newMission
+            }),
+            headers: {
+                'Accept':       'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+
+
+                    console.log('success!');
+
+
+                }
+            })
+
+        console.log('attach new mission', this.state.newMission, this.props.person.id);
+    }
+
 
     render() {
         console.log(this.state);
@@ -25,7 +52,7 @@ export default class PersonMissions extends React.Component {
                         ))
                     }
                 </ul>
-                <form>
+                <form onSubmit={this.handleNewMissionSubmit}>
                     <select
                         value={this.state.newMission}
                         onChange={(e) => { this.setState({ newMission: e.target.value }) }}

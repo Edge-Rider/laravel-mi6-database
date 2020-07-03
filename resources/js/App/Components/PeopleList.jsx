@@ -96,7 +96,7 @@ export default class PeopleList extends React.Component {
                                     <div className="person__name">{ person.name }</div>
                                     <div className="person__nationality">{ person.nationality }</div>
                                 </div>
-                                <PersonMissions missions={person.missions} allMissions={this.state.allMissions}/>
+                                <PersonMissions person={person} missions={person.missions} allMissions={this.state.allMissions}/>
                             </li>
                         ))
                     }

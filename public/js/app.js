@@ -29045,6 +29045,7 @@ var PeopleList = /*#__PURE__*/function (_React$Component) {
           }, person.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
             className: "person__nationality"
           }, person.nationality)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PersonMissions__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            person: person,
             missions: person.missions,
             allMissions: _this2.state.allMissions
           }));
@@ -29100,6 +29101,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -29114,13 +29117,35 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, PersonMissions);
 
     _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "handleNewMissionSubmit", function (event) {
+      event.preventDefault();
+      fetch('/api/whatever', {
+        method: 'POST',
+        body: JSON.stringify({
+          person_id: _this.props.person.id,
+          mission_id: _this.state.newMission
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+      }).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        if (data.status === 'success') {
+          console.log('success!');
+        }
+      });
+      console.log('attach new mission', _this.state.newMission, _this.props.person.id);
+    });
+
     _this.state = {
       newMission: null
     };
     return _this;
-  } // todo - fetch data from DB and render missions as options of select
-  // todo - make Add button working
-
+  }
 
   _createClass(PersonMissions, [{
     key: "render",
@@ -29134,7 +29159,9 @@ var PersonMissions = /*#__PURE__*/function (_React$Component) {
           name: mission.name,
           year: mission.year
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleNewMissionSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         value: this.state.newMission,
         onChange: function onChange(e) {
           _this2.setState({
