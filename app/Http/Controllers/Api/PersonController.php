@@ -12,6 +12,7 @@ class PersonController extends Controller
     public function index()
     {
         $people = Person::with('image')
+            ->with('missions')
             ->orderBy('name')
             ->limit(20)
             ->get();

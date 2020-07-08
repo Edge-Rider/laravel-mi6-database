@@ -1,4 +1,5 @@
 import React from 'react';
+import PersonMissions from "./PersonMissions";
 
 export default class PeopleList extends React.Component {
 
@@ -6,7 +7,8 @@ export default class PeopleList extends React.Component {
         super(props);
 
         this.state = {
-            data: null
+            data: null,
+            allMissions: null
         }
 
     }
@@ -39,9 +41,38 @@ export default class PeopleList extends React.Component {
                 }
             }
         })
+
+        fetch('/api/mission', {
+            headers: {
+                'Accept':       'application/json', // we expect JSON as response
+                'Content-Type': 'application/json', // if we are sending something in the body, it is JSON
+                'Authorization': 'Bearer ' + this.props.token
+            }
+        })
+            .then(response => {
+                // if the response code is 200 (OK)
+                if (response.status == 200) {
+                    // parse it as JSON and do the typical stuff
+                    response.json()
+                        .then(data => {
+                            // set the data into this component's state
+                            this.setState({
+                                allMissions: data
+                            })
+                        })
+                } else {
+                    // otherwise react on the error code
+                    if (response.status == 401) {
+                        // signal to the App that authentication failed
+                        this.props.onFailedAuthentication()
+                    }
+                }
+            })
     }
 
     render() {
+
+        console.log(this.state);
 
         // define initial content (the Loading... indicator)
         let content = (
@@ -65,8 +96,13 @@ export default class PeopleList extends React.Component {
                                     <div className="person__name">{ person.name }</div>
                                     <div className="person__nationality">{ person.nationality }</div>
                                 </div>
+                                <PersonMissions
+                                    token={this.props.token}
+                                    person={person}
+                                    missions={person.missions}
+                                    allMissions={this.state.allMissions}
+                                />
                             </li>
-
                         ))
                     }
                 </ul>

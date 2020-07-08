@@ -20,4 +20,8 @@ class Person extends Model
     {
         return $this->hasMany('App\Alias');
     }
+
+    public function missions(){
+        return $this->belongsToMany(Mission::class);
+    }
 }
